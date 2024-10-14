@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2695354244841108764}
   - component: {fileID: 7739952693354255578}
   - component: {fileID: 3300156434584943204}
-  m_Layer: 10
+  m_Layer: 3
   m_Name: Balloon 01
   m_TagString: Balloon
   m_Icon: {fileID: 0}
@@ -103,7 +103,8 @@ MonoBehaviour:
   _movementType: 3
   BalloonLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 8
+  ScorePop: {fileID: 1194270201482735392, guid: 4ba7ca693291ef54e86a655605fc193e, type: 3}
 --- !u!70 &-2695354244841108764
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

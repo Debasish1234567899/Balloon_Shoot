@@ -10,12 +10,13 @@ public class BalloonMovement : MonoBehaviour
     float positionX;
     Vector2 SpawnPoint;
     public LayerMask BalloonLayer;
+    [SerializeField] public GameObject ScorePop;
 
     AudioSource Balloon_Burst;
 
     // Score
     Text ScoreText;
-    static int ScoreNumbers;
+    public static int ScoreNumbers;
 
     //Health
     public static int HealthNumber = 3;
@@ -62,10 +63,7 @@ public class BalloonMovement : MonoBehaviour
 
         }
     }
-    void GameOver()
-    {
-
-    }
+    
 
     void RaycastEvent()
     {
@@ -76,13 +74,19 @@ public class BalloonMovement : MonoBehaviour
 
             Vector2 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(MousePosition, Vector2.up, 60f, BalloonLayer);
-            Debug.Log("RayCast Enters");
-            Debug.DrawRay(MousePosition, Vector2.up * 0.01f, Color.red, 1f);
+            AudioSource burstSound = GameObject.Find("Balloon_Burst").GetComponent<AudioSource>();
+            
+            
             if (hit.collider != null)
             {
+                burstSound.Play();
                 Debug.Log("RayCast2D Hits " + hit.collider.name);
                 StartCoroutine(ResetState());
                 ScoreNumbers++;
+               // GetComponent<Animator>().SetTrigger("Burst");
+              GameObject go =  Instantiate(ScorePop,new Vector2(this.transform.position.x,this.transform.position.y),Quaternion.identity);
+                go.transform.position += new Vector3(0,3) * Time.deltaTime*3;
+                Destroy(go,0.65f);
 
             }
             ScoreText.text = "Score: " + ScoreNumbers;
@@ -96,7 +100,7 @@ public class BalloonMovement : MonoBehaviour
         float positionX = Random.Range(-5, 5);
         SpawnPoint = new Vector2(positionX, -9.75f);
         GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.44f);
         GetComponent<Animator>().enabled = false;
         this.transform.position = SpawnPoint;
         this.gameObject.SetActive(false);
@@ -106,28 +110,28 @@ public class BalloonMovement : MonoBehaviour
     void MoveStraight()
     {
         
-        Vector3 movement = new Vector3(0, 1, 0)*3 *Time.deltaTime;
+        Vector3 movement = new Vector3(0, 1, 0)*1 *Time.deltaTime;
         transform.Translate(movement);
     }
     void MoveZigZag()
     {
-        float ZigzagMovementX = Mathf.Sin(Time.time * 3) * 0.5f;
+        float ZigzagMovementX = Mathf.Sin(Time.time * 1) * 0.5f;
         Vector3 movement = new Vector3(ZigzagMovementX, 1, 0)*Time.deltaTime*5;
         transform.Translate(movement);
     }
     void MoveWavy()
     {
-        float ZigzagMovementX = Mathf.Sin(Time.time * 2) * 0.7f;
+        float ZigzagMovementX = Mathf.Sin(Time.time * 1) * 0.7f;
         Vector3 movement = new Vector3(ZigzagMovementX, 1, 0)*Time.deltaTime*5;
         transform.Translate(movement);
     }
     void MoveSlow()
     {
-        transform.Translate(Vector2.up*6*Time.deltaTime);
+        transform.Translate(Vector2.up*2*Time.deltaTime);
     }
     void MoveFast()
     {
-        transform.Translate(Vector2.up * 12 * Time.deltaTime);
+        transform.Translate(Vector2.up * 5 * Time.deltaTime);
     }
 
     
@@ -135,6 +139,7 @@ public class BalloonMovement : MonoBehaviour
     {
         SetMovement(_movementType);
         RaycastEvent();
+        
     }
 }
 public enum MovementType

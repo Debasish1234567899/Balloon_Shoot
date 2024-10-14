@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3996828972974345458}
   - component: {fileID: 8181057200061771833}
   - component: {fileID: -8348546718828943601}
-  m_Layer: 10
+  m_Layer: 3
   m_Name: 1 2
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 150d16876da593046a81bc612139a9e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,10 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dd2915e02c15c42a5eb81030b6a331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementType: 3
+  _movementType: 1
   BalloonLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 8
+  ScorePop: {fileID: 1194270201482735392, guid: 4ba7ca693291ef54e86a655605fc193e, type: 3}
 --- !u!70 &-8348546718828943601
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

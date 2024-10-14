@@ -6,6 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Shoot_Baloon/Scenes/Home_Screen.unity
+    guid: d8d6429e051015646b45b4543345cd8f
+  - enabled: 1
+    path: Assets/Shoot_Baloon/Scenes/Shot_Ballon.unity
+    guid: dbc07e030be17f94cad56f0368f339be
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  m_configObjects: {}
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d353efe009e241940aa750b04e3ca531, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 8525372187fc62342ada1089a159501c, type: 2}
