@@ -6,6 +6,29 @@ using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour
 {
+    private static GameManger instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    public static void ResetInstance()
+    {
+        if (instance != null)
+        {
+            Destroy(instance.gameObject);
+            instance = null;
+        }
+    }
     //GameOver
     [SerializeField]GameObject GameOver_Panel;
     [SerializeField]GameObject Pause_Panel;
@@ -18,7 +41,7 @@ public class GameManger : MonoBehaviour
     {
         
         SpawnManager.GetComponent<Baloon_Spawner>().enabled = false;
-        Instantiate(GameOver_Panel, Vector2.zero, Quaternion.identity);
+        GameOver_Panel.SetActive(true);
         SetParent.SetActive(false);
         GameOVerHighScore.text = "Your Score is : " + BalloonMovement.ScoreNumbers;
         
@@ -46,6 +69,7 @@ public class GameManger : MonoBehaviour
     }
     public void RestartLevel()
     {
+        ResetInstance();
         SceneManager.LoadScene(1);
         Time.timeScale = 1;
         Pause_Panel.SetActive(false);
