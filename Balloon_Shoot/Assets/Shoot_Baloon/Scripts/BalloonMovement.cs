@@ -1,6 +1,8 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +20,11 @@ public class BalloonMovement : MonoBehaviour
     Text ScoreText;
     public static int ScoreNumbers;
 
+    //Combo
+    public int ComboCount;
+    [SerializeField] public GameObject ComboText;
+    
+
     //Health
     public static int HealthNumber = 3;
     Text HealthText;
@@ -28,6 +35,16 @@ public class BalloonMovement : MonoBehaviour
     {
         ScoreText = GameObject.Find("Scoring_Text (Legacy)").GetComponent<Text>();
         HealthText = GameObject.Find("Health_Number").GetComponent<Text>();
+        if (ComboText != null)
+        {
+            Debug.Log("Combo-Text Foubd");
+        }
+        else
+        {
+            Debug.Log("Combo Text Not Found");
+        }
+        
+        
     }
     void SetMovement(MovementType movementType)
     {
@@ -63,7 +80,7 @@ public class BalloonMovement : MonoBehaviour
 
         }
     }
-    
+
 
     void RaycastEvent()
     {
@@ -74,25 +91,50 @@ public class BalloonMovement : MonoBehaviour
 
             Vector2 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(MousePosition, Vector2.up, 60f, BalloonLayer);
-            AudioSource burstSound = GameObject.Find("Balloon_Burst").GetComponent<AudioSource>();
-            
-            
+            //AudioSource burstSound = GameObject.Find("Balloon_Burst").GetComponent<AudioSource>();
+
+
             if (hit.collider != null)
             {
-                burstSound.Play();
-                Debug.Log("RayCast2D Hits " + hit.collider.name);
-                StartCoroutine(ResetState());
-                ScoreNumbers++;
-               // GetComponent<Animator>().SetTrigger("Burst");
-              GameObject go =  Instantiate(ScorePop,new Vector2(this.transform.position.x,this.transform.position.y),Quaternion.identity);
-                go.transform.position += new Vector3(0,3) * Time.deltaTime*3;
-                Destroy(go,0.65f);
+                Debug.Log("Balloon Tag hits");
+                ComboCount++;
+                GameObject Go = Instantiate(ComboText,Vector2.zero, Quaternion.identity);
+                Destroy(Go,0.3f);
+                Go.GetComponentInChildren<Text>().text = "X" + ComboCount;
+
+                //burstSound.Play();
+                //Debug.Log("RayCast2D Hits " + hit.collider.name);
+                //StartCoroutine(ResetState());
+                //ScoreNumbers++;
+
+                //GameObject go = Instantiate(ScorePop, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
+                //go.transform.position += new Vector3(0, 3) * Time.deltaTime * 3;
+                //Destroy(go, 0.65f);
 
             }
-            ScoreText.text = "Score: " + ScoreNumbers;
+            else 
+            {
+                
+
+                ComboCount = 0;
+            }
+            //ScoreText.text = "Score: " + ScoreNumbers;
         }
 
 
+    }
+    private void OnMouseDown()
+    {
+        AudioSource burstSound = GameObject.Find("Balloon_Burst").GetComponent<AudioSource>();
+        burstSound.Play();
+        StartCoroutine(ResetState());
+        ScoreNumbers++;
+
+        GameObject go = Instantiate(ScorePop, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
+        go.transform.position += new Vector3(0, 3) * Time.deltaTime * 3;
+        Destroy(go, 0.65f);
+        ScoreText.text = "Score: " + ScoreNumbers;
+       
     }
 
     IEnumerator ResetState()

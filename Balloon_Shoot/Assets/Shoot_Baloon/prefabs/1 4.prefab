@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3996828972974345458}
   - component: {fileID: 8181057200061771833}
   - component: {fileID: -7601842701489670551}
+  - component: {fileID: 3383087701860843052}
+  - component: {fileID: 4446900620159497652}
   m_Layer: 3
   m_Name: 1 4
   m_TagString: Balloon
@@ -103,6 +105,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   ScorePop: {fileID: 1194270201482735392, guid: 4ba7ca693291ef54e86a655605fc193e, type: 3}
+  ComboCount: 0
+  ComboText: {fileID: 5489675873413856941, guid: 99b7ca263e44be64e91c23e18cc80b72, type: 3}
 --- !u!70 &-7601842701489670551
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +142,51 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.25}
   m_Size: {x: 3.08, y: 3.57}
   m_Direction: 0
+--- !u!50 &3383087701860843052
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159274509341120236}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!95 &4446900620159497652
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159274509341120236}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 814f938c5069ea84581e4633642ae9c9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -26,11 +26,16 @@ public class Baloon_Spawner : MonoBehaviour
         if (Time.time - currentTime >= Duration)
         {
             Duration -= 0.1f;
-            
+            if(Duration <= 1)
+            {
+                Duration = 1;
+            }
+            InvokeRepeating("_SpawnBalloon", 1, 3);
             _SpawnBalloon();
             currentTime = Time.time;
         }
     }
+
     
 
     void _SpawnBalloon()

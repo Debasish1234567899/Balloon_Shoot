@@ -10,6 +10,8 @@ public class ObjectPool : MonoBehaviour
     int PoolAmount = 20;
     [SerializeField] GameObject[] Balloon;
 
+    [SerializeField] Transform SteParent;
+
     private void Awake()
     {
         if(instance == null)
@@ -22,6 +24,7 @@ public class ObjectPool : MonoBehaviour
         for(int i = 0; i < PoolAmount; i++)
         {
             GameObject go = Instantiate(Balloon[i]);
+            go.transform.SetParent(SteParent);
             BaloonList.Add(go);
             go.SetActive(false);
         }
