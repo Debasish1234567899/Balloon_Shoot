@@ -9,7 +9,7 @@ public class GameOver : MonoBehaviour
     bool isGameOver = false;
     [SerializeField] GameObject GameOver_Panel;
     [SerializeField] Canvas canvas;
-    [SerializeField] Text GameOVerHighScore;
+    GameObject GameOVerHighScore;
     GameObject SpawnManager;
     [SerializeField] GameObject SetParent;
 
@@ -19,6 +19,7 @@ public class GameOver : MonoBehaviour
         SpawnManager = GameObject.Find("Baloon_Spawner");
         SetParent.SetActive(true);
         BalloonMovement.HealthNumber = 3;
+        BalloonMovement.ScoreNumbers = 0;
 
 
     }
@@ -33,9 +34,11 @@ public class GameOver : MonoBehaviour
         rectTransform.localScale = Vector3.one;
         SetParent.SetActive(false);
         
-        GameOVerHighScore.text = "Your Score is : " + BalloonMovement.ScoreNumbers;
-        GameOVerHighScore.text = "" + BalloonMovement.ScoreNumbers;
         
+          
+        GameOVerHighScore = GameObject.Find("GameOver_High_ScoreText (Legacy)");
+        GameOVerHighScore.GetComponent<Text>().text = "Your Score  " + BalloonMovement.ScoreNumbers;
+
 
 
     }
